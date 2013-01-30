@@ -39,7 +39,7 @@ def issue(request, issue_id=None):
                  'id': issue_id,
                  'name': request.user.get_full_name(),
                  'rznvy': 'fmsgame@gmail.com',  # request.user.email,
-                 #'email': '', # check this
+                 'email':request.user.email, # check this  
                  #'update': '', # text of the update (e.g., "I put it in the bin")
                  'fixed': '', # checkbox for: Is it fixed?
                  'add_alert': '', # don't add the user to automatic alert notifications
@@ -70,8 +70,8 @@ def issue(request, issue_id=None):
         request.session['last_issue_id'] = issue_id
         request.session['last_issue_status'] = state
 
-        # FIXME handle the response    
-        return HttpResponseRedirect(reverse('success'))
+        # FIXME handle the response   
+        return HttpResponseRedirect(reverse('success',args=(issue_id,)))#args=(issue_id,)
 
     fms_url = 'http://www.fixmystreet.com/report/%s/' %(issue_id)
     fms_response = urllib2.urlopen(fms_url)
@@ -175,7 +175,7 @@ def find_issues(request):
             link         = issue_url,
             description  = description_start + description_end,
             guid         = GeoRSS.Guid( issue_url ),
-            pubDate      = datetime.datetime.now(),    # FIXME
+            pubDate      = datetime.datetime.now(),    # FIXME #it's correct
             geo_lat    = str(issue['lat']),
             geo_long   = str(issue['lon']),
         )
