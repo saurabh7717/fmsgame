@@ -175,7 +175,7 @@ def find_issues(request):
             link         = issue_url,
             description  = description_start + description_end,
             guid         = GeoRSS.Guid( issue_url ),
-            pubDate      = datetime.datetime.now(),    # FIXME #it's correct
+            pubDate      = issue['date'],#datetime.datetime.now(),    # FIXME #it's correct
             geo_lat    = str(issue['lat']),
             geo_long   = str(issue['lon']),
         )

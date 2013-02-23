@@ -29,6 +29,7 @@ def find_nearby_issues( lat=None, lon=None):
             'lat':  rss_lat,
             'lon':  rss_lon,
             'summary': entry['summary'],
+	    'date': entry['updated'],	
         }
         
         issues.append( issue )
