@@ -167,8 +167,11 @@ def find_issues(request):
 
         # Not sure why this is not working... should strip out the 'Report on FixMyStreet' link
         # description_end = ''.join(BeautifulSoup( issue['summary'] ).findAll( lambda tag: tag.name != 'a' ))
-        issue_soup = BeautifulSoup(issue['summary'])
-        description_end = ' '.join([x for x in issue_soup.contents if isinstance(x, NavigableString)])
+	list_soup = list(BeautifulSoup(issue['summary']))
+	list_soup.pop()
+	description_end = str(list_soup)
+        #issue_soup = BeautifulSoup(issue['summary'])
+        #description_end = ' '.join([x for x in issue_soup.contents if isinstance(x, NavigableString)])
 
         item = GeoRSS.GeoRSSItem(
             title        = issue['name'],
